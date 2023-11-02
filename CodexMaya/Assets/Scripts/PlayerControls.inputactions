@@ -76,12 +76,24 @@
         {
             "name": "Mouse",
             "bindingGroup": "Mouse",
-            "devices": []
+            "devices": [
+                {
+                    "devicePath": "<Mouse>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
         },
         {
             "name": "TouchScreen",
             "bindingGroup": "TouchScreen",
-            "devices": []
+            "devices": [
+                {
+                    "devicePath": "<Touchscreen>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
         }
     ]
 }
