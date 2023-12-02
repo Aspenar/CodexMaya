@@ -6,8 +6,15 @@ using UnityEngine.UI;
 
 public class SwipeTest : MonoBehaviour
 {
+    [SerializeField]
+    private GameObject player;
     private FlickGesture _flick;
     public Image panelImage;
+    private float rotateRight = 90.0f;
+    private float rotateLeft = -90.0f;
+    private float currentRotate = 0.0f;
+    private Vector3 Rotation;
+
 
     private void OnEnable()
     {
@@ -29,11 +36,15 @@ public class SwipeTest : MonoBehaviour
 
             if (dotProduct > 0.1f)
             {
-                panelImage.color = Color.red;
+                 currentRotate += rotateRight;
+                player.transform.rotation = Quaternion.Euler(new Vector3 (0, currentRotate, 0));
+               
             }
             else if (dotProduct < -0.1f)
             {
-                panelImage.color = Color.green;
+                 currentRotate += rotateLeft;
+                player.transform.rotation = Quaternion.Euler(new Vector3 (0, currentRotate, 0));
+                //panelImage.color = Color.green;
             }
 
         }
