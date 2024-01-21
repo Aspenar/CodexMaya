@@ -10,6 +10,8 @@ public class Temple : MonoBehaviour
     private TapGesture tap;
     private bool isTapped = false;
 
+    private Canvas canvas;
+
     [SerializeField] private Camera activeCamera;
     [SerializeField] private CinemachineVirtualCamera virtualCamera1;
     [SerializeField] private CinemachineVirtualCamera virtualCamera2;
@@ -22,7 +24,7 @@ public class Temple : MonoBehaviour
 
     private void OnEnable()
     {
-        activeCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
+        activeCamera = GameObject.Find("Host").GetComponent<Camera>();
         virtualCamera1 = GameObject.Find("Virtual Camera 1").GetComponent<CinemachineVirtualCamera>();
         virtualCamera2 = GameObject.Find("Virtual Camera 2").GetComponent<CinemachineVirtualCamera>();
         virtualCamera3 = GameObject.Find("Virtual Camera 3").GetComponent<CinemachineVirtualCamera>();
@@ -30,6 +32,9 @@ public class Temple : MonoBehaviour
         virtualCamera2.gameObject.SetActive(false);
         virtualCamera3.gameObject.SetActive(false);
         
+        /*canvas = gameObject.GetComponent<Canvas>();
+        canvas.worldCamera = activeCamera;*/
+
         tap = GetComponent<TapGesture>();
         tap.Tapped += tappedHandler;
     }
@@ -39,7 +44,7 @@ public class Temple : MonoBehaviour
         if (isTapped)
         {
             // Old movement system that lerps the camera in a straight line
-            // activeCamera.transform.position = Vector3.Lerp(activeCamera.transform.position, templePosition.position, (speed * Time.deltaTime));
+           activeCamera.transform.position = Vector3.Lerp(activeCamera.transform.position, templePosition.position, (speed * Time.deltaTime));
 
             // New CineMachine camera movement that makes the camera follow a smooth path
             StartCoroutine(SwitchCamerasWithDelay());
@@ -52,6 +57,7 @@ public class Temple : MonoBehaviour
     private void tappedHandler(object sender, System.EventArgs e)
     {
         isTapped = true;
+        Debug.Log("Temple Tapped");
     }
 
     IEnumerator SwitchCamerasWithDelay() {

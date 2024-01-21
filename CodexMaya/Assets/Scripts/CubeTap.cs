@@ -14,7 +14,7 @@ public class CubeTap : MonoBehaviour
 
     private void OnEnable()
     {
-        activeCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
+        activeCamera = GameObject.Find("Host").GetComponent<Camera>();
         rb = GetComponent<Rigidbody>();
         tap = GetComponent<TapGesture>();
         tap.Tapped += tappedHandler;

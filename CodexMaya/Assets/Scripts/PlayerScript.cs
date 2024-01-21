@@ -13,8 +13,10 @@ public class PlayerScript : NetworkBehaviour
 
     private GameObject[] positions;
 
-    [SerializeField] private Camera _camera;
+    private Camera _camera;
     //[SerializeField] private GameObject _ownerUI;
+
+    private bool clientExist = false;
 
     public bool SceneIsLoaded
     {
@@ -79,6 +81,7 @@ public class PlayerScript : NetworkBehaviour
     }
     private void Awake()
     {
+        _camera = gameObject.GetComponent<Camera>();
         //InitializeSpawnPoints();
         if (GameObject.FindGameObjectsWithTag("Spawn").Length > 0)
         {
@@ -103,6 +106,7 @@ public class PlayerScript : NetworkBehaviour
         base.OnNetworkSpawn();
         SpawnPlayer();
         if (!IsOwner) return;
+        gameObject.name = "Host";
         _camera.enabled = true;
         //_ownerUI.SetActive(true);
     }
@@ -122,6 +126,11 @@ public class PlayerScript : NetworkBehaviour
                 //playerInPlace = true;
                 break;
             }
+        }
+
+        if (!IsOwner)
+        {
+            gameObject.transform.parent = GameObject.Find("Host").transform;
         }
     }
 
