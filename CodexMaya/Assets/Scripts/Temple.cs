@@ -8,7 +8,7 @@ public class Temple : MonoBehaviour
 {
     private float speed =.5f;
     private TapGesture tap;
-    private bool isTapped = false;
+    bool isTapped = false;
 
     private Canvas canvas;
 
@@ -36,7 +36,7 @@ public class Temple : MonoBehaviour
         canvas.worldCamera = activeCamera;*/
 
         tap = GetComponent<TapGesture>();
-        tap.Tapped += tappedHandler;
+        //tap.Tapped += tappedHandler;
     }
 
     private void Update()
@@ -54,7 +54,13 @@ public class Temple : MonoBehaviour
         }
     }
 
-    private void tappedHandler(object sender, System.EventArgs e)
+    /*private void tappedHandler(object sender, System.EventArgs e)
+    {
+        isTapped = true;
+        Debug.Log("Temple Tapped");
+    }*/
+
+    public void TempleTap()
     {
         isTapped = true;
         Debug.Log("Temple Tapped");
