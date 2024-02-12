@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: -1799611465421919071}
   - component: {fileID: -6930422629971951886}
   - component: {fileID: 8577129315726662869}
+  - component: {fileID: 9047930287316292346}
   m_Layer: 0
   m_Name: Player
   m_TagString: MainCamera
@@ -67,7 +68,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e05d2aba82603d498d126c4b8ebda70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_SceneName: SampleScene
 --- !u!114 &-6930422629971951886
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -153,3 +153,33 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!114 &9047930287316292346
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5183596159533683021}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e96cb6065543e43c4a752faaa1468eb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SyncPositionX: 1
+  SyncPositionY: 1
+  SyncPositionZ: 1
+  SyncRotAngleX: 1
+  SyncRotAngleY: 1
+  SyncRotAngleZ: 1
+  SyncScaleX: 1
+  SyncScaleY: 1
+  SyncScaleZ: 1
+  PositionThreshold: 0.001
+  RotAngleThreshold: 0.01
+  ScaleThreshold: 0.01
+  UseQuaternionSynchronization: 0
+  UseQuaternionCompression: 0
+  UseHalfFloatPrecision: 0
+  InLocalSpace: 1
+  Interpolate: 1
+  SlerpPosition: 0

@@ -13,6 +13,47 @@ public class SceneChanger : NetworkBehaviour
 
     NetworkSceneManager m_NetworkSceneManager;
 
+    /*private void Awake()
+    {
+        //m_NetworkSceneManager.OnSceneEvent += SceneManager_OnSceneEvent;
+        Debug.Log(NetworkManager.Singleton);
+        Debug.Log(NetworkManager.Singleton.SceneManager);
+        //m_NetworkSceneManager = NetworkManager.Singleton.SceneManager;
+
+        if (m_NetworkSceneManager != null)
+        {
+            m_NetworkSceneManager.OnSceneEvent += SceneManager_OnSceneEvent;
+        }
+    }*/
+
+    public override void OnNetworkSpawn()
+    {
+        base.OnNetworkSpawn();
+        /*Debug.Log(NetworkManager.Singleton);
+        Debug.Log(NetworkManager.Singleton.SceneManager);*/
+        m_NetworkSceneManager = NetworkManager.Singleton.SceneManager;
+
+        if (m_NetworkSceneManager != null)
+        {
+            m_NetworkSceneManager.OnSceneEvent += SceneManager_OnSceneEvent;
+        }
+    }
+
+    // Update is called once per frame
+    private void Update()
+    {
+        if (!IsOwner) return;
+        if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            GameObject.Find("Host").GetComponent<Camera>().enabled = false;
+            NextSceneServerRpc();
+            if (IsServer && !string.IsNullOrEmpty(m_SceneName))
+            {
+                UnloadScene();
+            }
+        }
+    }
+
     public bool SceneIsLoaded
     {
         get
@@ -75,48 +116,24 @@ public class SceneChanger : NetworkBehaviour
         }
     }
 
-    private void Awake()
-    {
-        //m_NetworkSceneManager.OnSceneEvent += SceneManager_OnSceneEvent;
-        m_NetworkSceneManager = NetworkManager.Singleton.SceneManager;
-        if (m_NetworkSceneManager != null)
-        {
-            m_NetworkSceneManager.OnSceneEvent += SceneManager_OnSceneEvent;
-        }
-    }
-
-    // Update is called once per frame
-    private void Update()
-    {
-        if (!IsOwner) return;
-        if (Input.GetKeyDown(KeyCode.RightArrow))
-        {
-            NextSceneServerRpc();
-            if (IsServer && !string.IsNullOrEmpty(m_SceneName))
-            {
-                UnloadScene();
-            }
-        }
-    }
-
     [ServerRpc]
     private void NextSceneServerRpc()
     {
         LoadNextScene();
 
-        NextSceneClientRpc();
+        //NextSceneClientRpc();
     }
 
-    [ClientRpc]
+    /*[ClientRpc]
     private void NextSceneClientRpc()
     {
         LoadNextScene();
-    }
+    }*/
 
     private void LoadNextScene()
     {
         UnloadScene();
-        var status = NetworkManager.Singleton.SceneManager.LoadScene(m_SceneName, LoadSceneMode.Single);
+        var status = m_NetworkSceneManager.LoadScene(m_SceneName, LoadSceneMode.Single);
         if (status != SceneEventProgressStatus.Started)
         {
             Debug.LogWarning($"Failed to load {m_SceneName} " +
@@ -126,6 +143,7 @@ public class SceneChanger : NetworkBehaviour
 
     public void UnloadScene()
     {
+        GameObject.Find("Host").GetComponent<Camera>().enabled = true;
         // Assure only the server calls this when the NetworkObject is
         // spawned and the scene is loaded.
         if (!IsServer || !IsSpawned || !m_LoadedScene.IsValid() || !m_LoadedScene.isLoaded)
@@ -134,8 +152,10 @@ public class SceneChanger : NetworkBehaviour
         }
 
         // Unload the scene
-        var status = NetworkManager.SceneManager.UnloadScene(m_LoadedScene);
+        var status = m_NetworkSceneManager.UnloadScene(m_LoadedScene);
         CheckStatus(status, false);
+        GameObject.Find("Host").GetComponent<Camera>().enabled = true;
+
     }
 
 }
