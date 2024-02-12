@@ -69,7 +69,6 @@ public class PlayerScript : NetworkBehaviour
         if (!IsOwner)
         {
             gameObject.transform.parent = GameObject.Find("Host").transform;
-            GetComponent<CinemachineBrain>().enabled = false;
         }
     }
 
