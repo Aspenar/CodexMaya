@@ -45,7 +45,7 @@ public class SceneChanger : NetworkBehaviour
         if (!IsOwner) return;
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
-            GameObject.Find("Host").GetComponent<Camera>().enabled = false;
+            GameObject.Find("Player 1").GetComponent<Camera>().enabled = false;
             NextSceneServerRpc();
             if (IsServer && !string.IsNullOrEmpty(m_SceneName))
             {
@@ -143,7 +143,7 @@ public class SceneChanger : NetworkBehaviour
 
     public void UnloadScene()
     {
-        GameObject.Find("Host").GetComponent<Camera>().enabled = true;
+        GameObject.Find("Player 1").GetComponent<Camera>().enabled = true;
         // Assure only the server calls this when the NetworkObject is
         // spawned and the scene is loaded.
         if (!IsServer || !IsSpawned || !m_LoadedScene.IsValid() || !m_LoadedScene.isLoaded)
@@ -154,7 +154,7 @@ public class SceneChanger : NetworkBehaviour
         // Unload the scene
         var status = m_NetworkSceneManager.UnloadScene(m_LoadedScene);
         CheckStatus(status, false);
-        GameObject.Find("Host").GetComponent<Camera>().enabled = true;
+        GameObject.Find("Player 1").GetComponent<Camera>().enabled = true;
 
     }
 
