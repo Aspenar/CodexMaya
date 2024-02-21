@@ -1,4 +1,3 @@
-using Cinemachine;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -6,6 +5,7 @@ using System.Globalization;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+//using Mirror;
 
 public class PlayerScript : NetworkBehaviour
 {
@@ -16,21 +16,19 @@ public class PlayerScript : NetworkBehaviour
 
     private static int playerCount = 0;
 
-    private void Awake()
-    {
-        _camera = GetComponent<Camera>();
-        //InitializeSpawnPoints();
-        FindSpawnPos();
-        //pixelCorrector = GetComponent<ScreenPixelCorrector>();
-    }
-
     public override void OnNetworkSpawn()
     {
         base.OnNetworkSpawn();
+        _camera = GetComponent<Camera>();
+        FindSpawnPos();
+
         SpawnPlayer();
-        if (!IsOwner) return;
-        //gameObject.name = "Host";
         _camera.enabled = true;
+
+        GetComponent<OVRScreenFade>().FadeIn();
+        //if (!IsOwner) return;
+        //gameObject.name = "Host";
+        //GetComponent<OVRScreenFade>().FadeIn();
         //_ownerUI.SetActive(true);
     }
 
