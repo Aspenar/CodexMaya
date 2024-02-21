@@ -12,14 +12,16 @@ public class PlayerScript : NetworkBehaviour
     private GameObject[] positions;
 
     private Camera _camera;
+    private ScreenPixelCorrector pixelCorrector;
 
     private static int playerCount = 0;
 
     private void Awake()
     {
-        _camera = gameObject.GetComponent<Camera>();
+        _camera = GetComponent<Camera>();
         //InitializeSpawnPoints();
         FindSpawnPos();
+        //pixelCorrector = GetComponent<ScreenPixelCorrector>();
     }
 
     public override void OnNetworkSpawn()
@@ -56,6 +58,20 @@ public class PlayerScript : NetworkBehaviour
     {
         playerCount++;
 
+        /*switch (playerCount)
+        {
+            case 1:
+                pixelCorrector.RearangeScreenSize(7266);
+                break;
+            case 2:
+                pixelCorrector.RearangeScreenSize(6065);
+                break;
+            case 3:
+                pixelCorrector.RearangeScreenSize(8480);
+                break;
+        }*/
+
+
         //When the player spawns, assign them to a position in the array
         for (int i = 0; i < positions.Length; i++)
         {
@@ -66,6 +82,9 @@ public class PlayerScript : NetworkBehaviour
                 Debug.Log(positions[i].name + " is available...");
                 gameObject.transform.position = positions[i].transform.position;
                 gameObject.transform.rotation = positions[i].transform.rotation;
+
+
+
                 gameObject.name = "Player " + playerCount.ToString(); 
                 positions[i].gameObject.SetActive(false);
                 //playerInPlace = true;
