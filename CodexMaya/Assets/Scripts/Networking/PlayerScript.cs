@@ -23,10 +23,11 @@ public class PlayerScript : NetworkBehaviour
         FindSpawnPos();
 
         SpawnPlayer();
-        _camera.enabled = true;
 
+        if (!IsOwner) return;
+        _camera.enabled = true;
         GetComponent<OVRScreenFade>().FadeIn();
-        //if (!IsOwner) return;
+
         //gameObject.name = "Host";
         //GetComponent<OVRScreenFade>().FadeIn();
         //_ownerUI.SetActive(true);

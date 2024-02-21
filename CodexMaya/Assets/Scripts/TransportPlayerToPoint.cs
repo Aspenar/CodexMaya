@@ -11,11 +11,6 @@ public class TransportPlayerToPoint : NetworkBehaviour
 
     [SerializeField] private List<Transform> positions;
 
-    private void Awake()
-    {
-
-    }
-
     public override void OnNetworkSpawn()
     {
         base.OnNetworkSpawn();
@@ -28,6 +23,8 @@ public class TransportPlayerToPoint : NetworkBehaviour
             players[i].GetComponent<PlayerScript>().FindSpawnPos();
             Debug.Log(players[i]);
         }
+
+        MovePlayer();
     }
 
     public void MovePlayer()
