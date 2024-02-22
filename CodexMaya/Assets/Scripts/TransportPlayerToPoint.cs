@@ -11,6 +11,7 @@ public class TransportPlayerToPoint : NetworkBehaviour
 
     [SerializeField] private List<Transform> positions;
 
+
     public override void OnNetworkSpawn()
     {
         base.OnNetworkSpawn();
@@ -18,10 +19,10 @@ public class TransportPlayerToPoint : NetworkBehaviour
         for (int i = 0; i < GameObject.FindGameObjectsWithTag("MainCamera").Length; i++)
         {
             GameObject player = GameObject.Find("Player " + (i + 1));
-            Debug.Log(player);
+            //Debug.Log(player);
             players.Add(player);
             players[i].GetComponent<PlayerScript>().FindSpawnPos();
-            Debug.Log(players[i]);
+            //Debug.Log(players[i]);
         }
 
         MovePlayer();
@@ -29,8 +30,25 @@ public class TransportPlayerToPoint : NetworkBehaviour
 
     public void MovePlayer()
     {
-        StartCoroutine(StartFade());
+        //Debug.Log("Moving Player");
 
+        SendButtonClickToServerRpc();
+        //StartCoroutine(StartFade());
+
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    private void SendButtonClickToServerRpc()
+    {
+        HandleButtonClickClientRpc();
+        //Debug.Log("ButtonClicked");
+    }
+
+    [ClientRpc]
+    private void HandleButtonClickClientRpc()
+    {
+        //Debug.Log("Starting Fade");
+        StartCoroutine(StartFade());
     }
 
     IEnumerator StartFade()
@@ -39,7 +57,7 @@ public class TransportPlayerToPoint : NetworkBehaviour
         {
             fade = players[i].GetComponent<OVRScreenFade>();
             fade.FadeOut();
-            
+
             yield return new WaitForSeconds(1);
 
             for (int y = 0; y < positions.Count; y++)
