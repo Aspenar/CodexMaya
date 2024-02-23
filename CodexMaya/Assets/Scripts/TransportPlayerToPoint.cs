@@ -25,7 +25,7 @@ public class TransportPlayerToPoint : NetworkBehaviour
             //Debug.Log(players[i]);
         }
 
-        MovePlayer();
+        //MovePlayer();
     }
 
     public void MovePlayer()
