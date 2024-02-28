@@ -1928,7 +1928,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7496718820013812473, guid: eb3c6cd3f2a7fe24ba1d899c25f57c03, type: 3}
       propertyPath: m_SceneName
-      value: IntroEnvirornment
+      value: IntroEnvironment
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
