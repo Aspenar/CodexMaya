@@ -8,11 +8,19 @@ public class PlaneZoom : MonoBehaviour
     private bool clicked = false;
     private bool isEnlarged = false;
 
+    public string enlargeAnim;
+    public string minimizeAnim;
+
     private Animator anim;
+    private Renderer rend;
+    public Material mat1;
+    public Material mat2;
 
     private void Awake()
     {
         anim = GetComponent<Animator>();
+        rend = GetComponent<Renderer>();
+        mat1 = rend.material;
     }
 
     private void Update()
@@ -21,7 +29,8 @@ public class PlaneZoom : MonoBehaviour
         {
             if (!isEnlarged)
             {
-                anim.Play("Enlarge2");
+                anim.Play(enlargeAnim);
+                rend.material = mat2;
                 isEnlarged = true;
             }
         }
@@ -29,7 +38,8 @@ public class PlaneZoom : MonoBehaviour
         {
             if (isEnlarged)
             {
-                anim.Play("Minimize");
+                anim.Play(minimizeAnim);
+                rend.material = mat1;
                 isEnlarged = false;
             }
         }
@@ -37,6 +47,7 @@ public class PlaneZoom : MonoBehaviour
 
     public void Clicked()
     {
+        Debug.Log("Clicked");
         if (clicked)
         {
             clicked = false;
