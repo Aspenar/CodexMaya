@@ -11,6 +11,9 @@ public class SceneChanger : NetworkBehaviour
     [SerializeField] private string m_SceneName;
     private Scene m_LoadedScene;
 
+    private List<GameObject> players;
+
+
     NetworkSceneManager m_NetworkSceneManager;
 
     /*private void Awake()
@@ -37,6 +40,15 @@ public class SceneChanger : NetworkBehaviour
         {
             m_NetworkSceneManager.OnSceneEvent += SceneManager_OnSceneEvent;
         }
+
+        players = new List<GameObject>();
+        for (int i = 0; i < GameObject.FindGameObjectsWithTag("MainCamera").Length; i++)
+        {
+            GameObject player = GameObject.Find("Player " + (i + 1));
+            players.Add(player);
+            Debug.Log(player.name);
+        }
+
     }
 
     // Update is called once per frame
@@ -45,12 +57,30 @@ public class SceneChanger : NetworkBehaviour
         if (!IsOwner) return;
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
-            GameObject.Find("Host").GetComponent<Camera>().enabled = false;
-            NextSceneServerRpc();
+            StartCoroutine(StartTransition());
+
+            //GameObject.Find("Player 1").GetComponent<Camera>().enabled = false;
             if (IsServer && !string.IsNullOrEmpty(m_SceneName))
             {
                 UnloadScene();
             }
+        }
+    }
+
+    IEnumerator StartTransition()
+    {
+        foreach (GameObject player in players) 
+        {
+            player.GetComponent<OVRScreenFade>().FadeOut();
+        }
+
+        yield return new WaitForSeconds(2);
+
+        NextSceneServerRpc();
+
+        foreach (GameObject player in players)
+        {
+            player.GetComponent<OVRScreenFade>().FadeIn();
         }
     }
 
@@ -143,7 +173,7 @@ public class SceneChanger : NetworkBehaviour
 
     public void UnloadScene()
     {
-        GameObject.Find("Host").GetComponent<Camera>().enabled = true;
+        //GameObject.Find("Player 1").GetComponent<Camera>().enabled = true;
         // Assure only the server calls this when the NetworkObject is
         // spawned and the scene is loaded.
         if (!IsServer || !IsSpawned || !m_LoadedScene.IsValid() || !m_LoadedScene.isLoaded)
@@ -154,7 +184,7 @@ public class SceneChanger : NetworkBehaviour
         // Unload the scene
         var status = m_NetworkSceneManager.UnloadScene(m_LoadedScene);
         CheckStatus(status, false);
-        GameObject.Find("Host").GetComponent<Camera>().enabled = true;
+        GameObject.Find("Player 1").GetComponent<Camera>().enabled = true;
 
     }
 
