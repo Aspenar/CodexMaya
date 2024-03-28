@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class PlaneZoom : MonoBehaviour
 {
-    private GameObject greyOut;
+    public GameObject greyOut;
     private bool clicked = false;
     private bool isEnlarged = false;
 
