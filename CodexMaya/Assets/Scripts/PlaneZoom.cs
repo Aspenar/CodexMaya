@@ -26,6 +26,7 @@ public class PlaneZoom : MonoBehaviour
                 anim.Play(enlargeAnim);
 /*                rend.material = mat2;
 */                isEnlarged = true;
+                greyOut.SetActive(true);
             }
         }
         else if (!clicked)
@@ -35,6 +36,7 @@ public class PlaneZoom : MonoBehaviour
                 anim.Play(minimizeAnim);
 /*                rend.material = mat1;
 */                isEnlarged = false;
+                greyOut.SetActive(false);
             }
         }
     }
