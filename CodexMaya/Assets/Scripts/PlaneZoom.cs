@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class PlaneZoom : NetworkBehaviour
 {
-    public GameObject[] greyOut;
+    public GameObject greyOut;
     private bool clicked = false;
     private bool isEnlarged = false;
 
@@ -22,7 +22,7 @@ public class PlaneZoom : NetworkBehaviour
     public override void OnNetworkSpawn()
     {
         base.OnNetworkSpawn();
-        greyOut = GameObject.FindGameObjectsWithTag("greyOut");
+
     }
 
     /*private void Awake()
@@ -46,10 +46,7 @@ public class PlaneZoom : NetworkBehaviour
             //Debug.Log(currentTransform.position);
             codexTezcatilpoca.pageTurner.SetActive(false);
             //isEnlarged = true;
-            for (int i = 0; i < greyOut.Length; i++)
-            {
-                greyOut[i].gameObject.SetActive(true);
-            }
+                greyOut.gameObject.SetActive(true);
             //}
         }
         //Minimize plane
