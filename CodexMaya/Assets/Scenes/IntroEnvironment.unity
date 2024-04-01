@@ -7530,7 +7530,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 8844983115431597666}
         m_TargetAssemblyTypeName: CodexTezcatilpoca, Assembly-CSharp
-        m_MethodName: RotateRight
+        m_MethodName: RotateRightServerRpc
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -14463,7 +14463,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 8844983115431597666}
         m_TargetAssemblyTypeName: CodexTezcatilpoca, Assembly-CSharp
-        m_MethodName: RotateLeft
+        m_MethodName: RotateLeftServerRpc
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -16098,7 +16098,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02672f21fe572e544be85e4a631b6ba8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  greyOut: {fileID: 0}
+  greyOut:
+  - {fileID: 0}
   codexTezcatilpoca: {fileID: 0}
   lerpSpeed: 0
   planeTransform: {fileID: 0}
@@ -16459,6 +16460,7 @@ GameObject:
   - component: {fileID: 453478532}
   - component: {fileID: 453478531}
   - component: {fileID: 453478530}
+  - component: {fileID: 453478535}
   m_Layer: 0
   m_Name: Canvas_1
   m_TagString: Untagged
@@ -16563,6 +16565,26 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &453478535
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 453478529}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 632777069
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!1 &456400488
 GameObject:
   m_ObjectHideFlags: 0
@@ -30002,7 +30024,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02672f21fe572e544be85e4a631b6ba8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  greyOut: {fileID: 0}
+  greyOut:
+  - {fileID: 0}
   codexTezcatilpoca: {fileID: 0}
   lerpSpeed: 0
   planeTransform: {fileID: 0}
@@ -31511,7 +31534,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02672f21fe572e544be85e4a631b6ba8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  greyOut: {fileID: 0}
+  greyOut:
+  - {fileID: 0}
   codexTezcatilpoca: {fileID: 0}
   lerpSpeed: 0
   planeTransform: {fileID: 0}
@@ -42288,7 +42312,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02672f21fe572e544be85e4a631b6ba8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  greyOut: {fileID: 0}
+  greyOut:
+  - {fileID: 0}
   codexTezcatilpoca: {fileID: 0}
   lerpSpeed: 0
   planeTransform: {fileID: 0}
@@ -61238,6 +61263,7 @@ GameObject:
   - component: {fileID: 5067914561940066200}
   - component: {fileID: 7967366675332782338}
   - component: {fileID: 7967366675332782339}
+  - component: {fileID: 7967366675332782340}
   m_Layer: 0
   m_Name: CodexPage
   m_TagString: Untagged
@@ -61629,7 +61655,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02672f21fe572e544be85e4a631b6ba8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  greyOut: {fileID: 0}
+  greyOut:
+  - {fileID: 0}
   codexTezcatilpoca: {fileID: 8844983115431597666}
   lerpSpeed: 1
   planeTransform: {fileID: 33129791}
@@ -61782,7 +61809,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02672f21fe572e544be85e4a631b6ba8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  greyOut: {fileID: 0}
+  greyOut:
+  - {fileID: 0}
   codexTezcatilpoca: {fileID: 8844983115431597666}
   lerpSpeed: 1
   planeTransform: {fileID: 33129791}
@@ -62501,7 +62529,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02672f21fe572e544be85e4a631b6ba8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  greyOut: {fileID: 0}
+  greyOut:
+  - {fileID: 0}
   codexTezcatilpoca: {fileID: 8844983115431597666}
   lerpSpeed: 1
   planeTransform: {fileID: 33129791}
@@ -62794,7 +62823,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02672f21fe572e544be85e4a631b6ba8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  greyOut: {fileID: 0}
+  greyOut:
+  - {fileID: 0}
   codexTezcatilpoca: {fileID: 8844983115431597666}
   lerpSpeed: 1
   planeTransform: {fileID: 33129791}
@@ -62882,7 +62912,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02672f21fe572e544be85e4a631b6ba8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  greyOut: {fileID: 0}
+  greyOut:
+  - {fileID: 0}
   codexTezcatilpoca: {fileID: 8844983115431597666}
   lerpSpeed: 1
   planeTransform: {fileID: 33129791}
@@ -63180,7 +63211,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02672f21fe572e544be85e4a631b6ba8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  greyOut: {fileID: 0}
+  greyOut:
+  - {fileID: 0}
   codexTezcatilpoca: {fileID: 8844983115431597666}
   lerpSpeed: 1
   planeTransform: {fileID: 33129791}
@@ -63341,7 +63373,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02672f21fe572e544be85e4a631b6ba8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  greyOut: {fileID: 0}
+  greyOut:
+  - {fileID: 0}
   codexTezcatilpoca: {fileID: 8844983115431597666}
   lerpSpeed: 1
   planeTransform: {fileID: 33129791}
@@ -63547,7 +63580,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02672f21fe572e544be85e4a631b6ba8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  greyOut: {fileID: 0}
+  greyOut:
+  - {fileID: 0}
   codexTezcatilpoca: {fileID: 8844983115431597666}
   lerpSpeed: 1
   planeTransform: {fileID: 33129791}
@@ -63738,7 +63772,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02672f21fe572e544be85e4a631b6ba8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  greyOut: {fileID: 0}
+  greyOut:
+  - {fileID: 0}
   codexTezcatilpoca: {fileID: 8844983115431597666}
   lerpSpeed: 1
   planeTransform: {fileID: 33129791}
@@ -64014,7 +64049,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02672f21fe572e544be85e4a631b6ba8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  greyOut: {fileID: 0}
+  greyOut:
+  - {fileID: 0}
   codexTezcatilpoca: {fileID: 8844983115431597666}
   lerpSpeed: 1
   planeTransform: {fileID: 33129791}
@@ -64075,7 +64111,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02672f21fe572e544be85e4a631b6ba8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  greyOut: {fileID: 0}
+  greyOut:
+  - {fileID: 0}
   codexTezcatilpoca: {fileID: 8844983115431597666}
   lerpSpeed: 1
   planeTransform: {fileID: 33129791}
@@ -64129,7 +64166,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02672f21fe572e544be85e4a631b6ba8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  greyOut: {fileID: 0}
+  greyOut:
+  - {fileID: 0}
   codexTezcatilpoca: {fileID: 8844983115431597666}
   lerpSpeed: 1
   planeTransform: {fileID: 33129791}
@@ -64191,7 +64229,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02672f21fe572e544be85e4a631b6ba8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  greyOut: {fileID: 0}
+  greyOut:
+  - {fileID: 0}
   codexTezcatilpoca: {fileID: 8844983115431597666}
   lerpSpeed: 1
   planeTransform: {fileID: 33129791}
@@ -64225,6 +64264,26 @@ MonoBehaviour:
   InLocalSpace: 0
   Interpolate: 1
   SlerpPosition: 0
+--- !u!114 &7967366675332782340
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4917806937657226725}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 1572859074
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!1 &8054656833391782879
 GameObject:
   m_ObjectHideFlags: 0
@@ -64385,7 +64444,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02672f21fe572e544be85e4a631b6ba8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  greyOut: {fileID: 0}
+  greyOut:
+  - {fileID: 0}
   codexTezcatilpoca: {fileID: 8844983115431597666}
   lerpSpeed: 1
   planeTransform: {fileID: 33129791}
@@ -64570,7 +64630,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02672f21fe572e544be85e4a631b6ba8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  greyOut: {fileID: 0}
+  greyOut:
+  - {fileID: 0}
   codexTezcatilpoca: {fileID: 8844983115431597666}
   lerpSpeed: 1
   planeTransform: {fileID: 33129791}
@@ -64647,7 +64708,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02672f21fe572e544be85e4a631b6ba8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  greyOut: {fileID: 0}
+  greyOut:
+  - {fileID: 0}
   codexTezcatilpoca: {fileID: 8844983115431597666}
   lerpSpeed: 1
   planeTransform: {fileID: 33129791}
@@ -64760,7 +64822,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02672f21fe572e544be85e4a631b6ba8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  greyOut: {fileID: 0}
+  greyOut:
+  - {fileID: 0}
   codexTezcatilpoca: {fileID: 8844983115431597666}
   lerpSpeed: 1
   planeTransform: {fileID: 33129791}
@@ -64842,6 +64905,7 @@ GameObject:
   - component: {fileID: 8844983115431597665}
   - component: {fileID: 8844983115431597666}
   - component: {fileID: 8844983115431597667}
+  - component: {fileID: 8844983115431597668}
   m_Layer: 0
   m_Name: Codex Tezcatilpoca
   m_TagString: Untagged
@@ -64917,6 +64981,20 @@ MonoBehaviour:
   SpawnWithObservers: 1
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1
+--- !u!114 &8844983115431597668
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8844983115431597664}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a982e5115aae26f4590dee19fdc685e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TransitionStateInfoList: []
+  m_Animator: {fileID: 7522470688241988757}
 --- !u!64 &8862025495609730199
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -65171,7 +65249,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02672f21fe572e544be85e4a631b6ba8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  greyOut: {fileID: 0}
+  greyOut:
+  - {fileID: 0}
   codexTezcatilpoca: {fileID: 8844983115431597666}
   lerpSpeed: 1
   planeTransform: {fileID: 33129791}
@@ -65269,7 +65348,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02672f21fe572e544be85e4a631b6ba8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  greyOut: {fileID: 0}
+  greyOut:
+  - {fileID: 0}
   codexTezcatilpoca: {fileID: 8844983115431597666}
   lerpSpeed: 1
   planeTransform: {fileID: 33129791}
@@ -65357,7 +65437,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02672f21fe572e544be85e4a631b6ba8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  greyOut: {fileID: 0}
+  greyOut:
+  - {fileID: 0}
   codexTezcatilpoca: {fileID: 8844983115431597666}
   lerpSpeed: 1
   planeTransform: {fileID: 33129791}
@@ -65445,7 +65526,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02672f21fe572e544be85e4a631b6ba8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  greyOut: {fileID: 0}
+  greyOut:
+  - {fileID: 0}
   codexTezcatilpoca: {fileID: 8844983115431597666}
   lerpSpeed: 1
   planeTransform: {fileID: 33129791}
@@ -65612,7 +65694,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02672f21fe572e544be85e4a631b6ba8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  greyOut: {fileID: 0}
+  greyOut:
+  - {fileID: 0}
   codexTezcatilpoca: {fileID: 8844983115431597666}
   lerpSpeed: 1
   planeTransform: {fileID: 33129791}

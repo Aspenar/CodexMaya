@@ -74,7 +74,7 @@ public class SceneChanger : NetworkBehaviour
             player.GetComponent<OVRScreenFade>().FadeOut();
         }
 
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(.01f);
 
         NextSceneServerRpc();
 

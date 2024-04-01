@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlaneZoom : MonoBehaviour
+public class PlaneZoom : NetworkBehaviour
 {
-    public GameObject greyOut;
+    public GameObject[] greyOut;
     private bool clicked = false;
     private bool isEnlarged = false;
 
@@ -18,10 +19,16 @@ public class PlaneZoom : MonoBehaviour
     private Transform originalTransform;
     private Transform target;
 
-    private void Awake()
+    public override void OnNetworkSpawn()
+    {
+        base.OnNetworkSpawn();
+        greyOut = GameObject.FindGameObjectsWithTag("greyOut");
+    }
+
+    /*private void Awake()
     {
         GameObject greyOut = GameObject.FindGameObjectWithTag("greyOut");
-    }
+    }*/
 
     private void Update()
     {
@@ -32,14 +39,17 @@ public class PlaneZoom : MonoBehaviour
 
             /*if (!isEnlarged)
             {*/
-                //Debug.Log("2");
+            //Debug.Log("2");
 
-                transform.position = Vector3.Lerp(transform.position, planeTransform.position, Time.deltaTime * lerpSpeed);
-                transform.rotation = Quaternion.Lerp(transform.rotation, planeTransform.rotation, Time.deltaTime * lerpSpeed);
-                //Debug.Log(currentTransform.position);
-                codexTezcatilpoca.pageTurner.SetActive(false);
-                //isEnlarged = true;
-                greyOut.SetActive(true);
+            transform.position = Vector3.Lerp(transform.position, planeTransform.position, Time.deltaTime * lerpSpeed);
+            transform.rotation = Quaternion.Lerp(transform.rotation, planeTransform.rotation, Time.deltaTime * lerpSpeed);
+            //Debug.Log(currentTransform.position);
+            codexTezcatilpoca.pageTurner.SetActive(false);
+            //isEnlarged = true;
+            for (int i = 0; i < greyOut.Length; i++)
+            {
+                greyOut[i].gameObject.SetActive(true);
+            }
             //}
         }
         //Minimize plane
@@ -69,10 +79,10 @@ public class PlaneZoom : MonoBehaviour
         else if (!clicked)
         {
             originalTransform = transform;
-            Debug.Log(originalTransform.position);
+            //Debug.Log(originalTransform.position);
             clicked = true;
         }
-        Debug.Log(clicked);
+        Debug.Log("Panel is: " + clicked);
     }
 
 }
