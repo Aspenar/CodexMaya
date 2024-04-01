@@ -84,7 +84,7 @@ public class PlayerScript : NetworkBehaviour
 
 
 
-                gameObject.name = "Player " + playerCount.ToString(); 
+                gameObject.name = "Camera" + playerCount.ToString(); 
                 positions[i].gameObject.SetActive(false);
                 //playerInPlace = true;
                 break;

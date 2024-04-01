@@ -44,7 +44,7 @@ public class SceneChanger : NetworkBehaviour
         players = new List<GameObject>();
         for (int i = 0; i < GameObject.FindGameObjectsWithTag("MainCamera").Length; i++)
         {
-            GameObject player = GameObject.Find("Player " + (i + 1));
+            GameObject player = GameObject.Find("Camera" + (i + 1));
             players.Add(player);
             Debug.Log(player.name);
         }
@@ -74,7 +74,7 @@ public class SceneChanger : NetworkBehaviour
             player.GetComponent<OVRScreenFade>().FadeOut();
         }
 
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(.01f);
 
         NextSceneServerRpc();
 
