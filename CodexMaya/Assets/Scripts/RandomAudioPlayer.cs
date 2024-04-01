@@ -16,6 +16,13 @@ public class RandomAudioPlayer : MonoBehaviour
 
     void callAudio()
     {
-        Invoke("randomAudio", 5);
+        Invoke("RandomSounds", 5);
+    }
+
+    void RandomSounds()
+    {
+        randomAudio.clip = audioClips[Random.Range(0, audioClips.Length)];
+        randomAudio.Play();
+        callAudio();
     }
 }
