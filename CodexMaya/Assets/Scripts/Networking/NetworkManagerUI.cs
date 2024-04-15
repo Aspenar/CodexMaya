@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.InputSystem.LowLevel;
 using UnityEngine.UI;
 
 public class NetworkManagerUI : MonoBehaviour
 {
     [SerializeField] private Button hostBtn;
     [SerializeField] private Button clientBtn;
+    [SerializeField] private GameObject NextUI;
     //[SerializeField] private GameObject OwnerUI;
 
     private void Awake()
@@ -15,19 +17,18 @@ public class NetworkManagerUI : MonoBehaviour
         hostBtn.onClick.AddListener(() =>
         {
             NetworkManager.Singleton.StartHost();
-            ClearUI();
+            InitNextUI();
         });
         clientBtn.onClick.AddListener(() =>
         {
             NetworkManager.Singleton.StartClient();
-            ClearUI();
+            InitNextUI();
         });
     }
 
-    private void ClearUI()
+    private void InitNextUI()
     {
-        hostBtn.gameObject.SetActive(false);
-        clientBtn.gameObject.SetActive(false);
-        //OwnerUI.SetActive(true);
+        gameObject.SetActive(false);
+        NextUI.SetActive(true);
     }
 }

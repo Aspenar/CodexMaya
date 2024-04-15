@@ -16,7 +16,7 @@ public class RandomAudioPlayer : MonoBehaviour
 
     void callAudio()
     {
-        Invoke("RandomSounds", 5);
+        Invoke("RandomSounds", 20);
     }
 
     void RandomSounds()

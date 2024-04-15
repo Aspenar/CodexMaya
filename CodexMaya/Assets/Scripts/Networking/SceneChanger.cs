@@ -8,11 +8,13 @@ using UnityEngine.SceneManagement;
 
 public class SceneChanger : NetworkBehaviour
 {
+    private NetworkVariable<bool> m_NextScene = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+
+
     [SerializeField] private string m_SceneName;
     private Scene m_LoadedScene;
 
     private List<GameObject> players;
-
 
     NetworkSceneManager m_NetworkSceneManager;
 
@@ -41,6 +43,8 @@ public class SceneChanger : NetworkBehaviour
             m_NetworkSceneManager.OnSceneEvent += SceneManager_OnSceneEvent;
         }
 
+        m_NextScene.OnValueChanged += OnSceneStateChanged;
+
         players = new List<GameObject>();
         for (int i = 0; i < GameObject.FindGameObjectsWithTag("MainCamera").Length; i++)
         {
@@ -51,15 +55,44 @@ public class SceneChanger : NetworkBehaviour
 
     }
 
-    // Update is called once per frame
-    private void Update()
+    public override void OnNetworkDespawn()
     {
-        if (!IsOwner) return;
-        if (Input.GetKeyDown(KeyCode.RightArrow))
+        if (m_NetworkSceneManager != null)
+        {
+            m_NetworkSceneManager.OnSceneEvent -= SceneManager_OnSceneEvent;
+        }
+        m_NextScene.OnValueChanged -= OnSceneStateChanged;
+    }
+      
+
+    // Update is called once per frame
+   /* private void Update()
+    {
+        //if (!IsOwner) return;
+        if ()
         {
             StartCoroutine(StartTransition());
 
             //GameObject.Find("Player 1").GetComponent<Camera>().enabled = false;
+            
+        }
+    }*/
+
+    [ServerRpc(RequireOwnership = false)]
+    public void InitiateSceneTransitionServerRpc()
+    {
+        m_NextScene.Value = true;
+        Debug.Log(m_NextScene.Value);
+    }
+
+    private void OnSceneStateChanged(bool previousValue, bool newValue)
+    {
+        // Update the animation state based on the networked variable
+        if (newValue)
+        {
+            //StartCoroutine(PlayAnimation()); 
+            NextSceneServerRpc();
+
             if (IsServer && !string.IsNullOrEmpty(m_SceneName))
             {
                 UnloadScene();
@@ -146,7 +179,7 @@ public class SceneChanger : NetworkBehaviour
         }
     }
 
-    [ServerRpc]
+    [ServerRpc(RequireOwnership = false)]
     private void NextSceneServerRpc()
     {
         LoadNextScene();
