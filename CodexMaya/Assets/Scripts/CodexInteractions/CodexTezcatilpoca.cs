@@ -6,6 +6,7 @@ using static UnityEngine.CullingGroup;
 
 public class CodexTezcatilpoca : NetworkBehaviour
 {
+    //this script is for interacting with the codex, still running into performance issues but page turns and enlarging is working currently even if it is slow
     private NetworkVariable<bool> m_IsAnimationPlaying = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
     [Header("Animations")]

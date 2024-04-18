@@ -8,6 +8,7 @@ using UnityEngine.SceneManagement;
 
 public class SceneChanger : NetworkBehaviour
 {
+    //standard unity netcode for network variables
     private NetworkVariable<bool> m_NextScene = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
 
@@ -30,7 +31,7 @@ public class SceneChanger : NetworkBehaviour
             m_NetworkSceneManager.OnSceneEvent += SceneManager_OnSceneEvent;
         }
     }*/
-
+//used to grab scene manager for all players
     public override void OnNetworkSpawn()
     {
         base.OnNetworkSpawn();
@@ -54,7 +55,7 @@ public class SceneChanger : NetworkBehaviour
         }
 
     }
-
+//override for scene changes
     public override void OnNetworkDespawn()
     {
         if (m_NetworkSceneManager != null)
@@ -77,7 +78,7 @@ public class SceneChanger : NetworkBehaviour
             
         }
     }*/
-
+//server rpc is for communication between host and client
     [ServerRpc(RequireOwnership = false)]
     public void InitiateSceneTransitionServerRpc()
     {
@@ -203,7 +204,7 @@ public class SceneChanger : NetworkBehaviour
                   $"with a {nameof(SceneEventProgressStatus)}: {status}");
         }
     }
-
+//checks if new scene is loaded then unloads old scene for performance
     public void UnloadScene()
     {
         //GameObject.Find("Player 1").GetComponent<Camera>().enabled = true;

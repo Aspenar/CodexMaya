@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 public class PlaneZoom : NetworkBehaviour
 {
+    //this script allows the player to enlarge the plane by tapping on it, runs extremely slowly but it does eventually enlarge the plane, scene change from this is a little difficult but being worked on
     //public GameObject greyOut;
     private bool clicked = false;
     private bool isEnlarged = false;

@@ -11,7 +11,7 @@ public class NetworkManagerUI : MonoBehaviour
     [SerializeField] private Button clientBtn;
     [SerializeField] private GameObject NextUI;
     //[SerializeField] private GameObject OwnerUI;
-
+//adds listeners to buttons to start multiplayer for luminary
     private void Awake()
     {
         hostBtn.onClick.AddListener(() =>
