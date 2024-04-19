@@ -7,10 +7,12 @@ using UnityEngine.UI;
 
 public class PlaneZoom : NetworkBehaviour
 {
-    public GameObject greyOut;
+    //this script allows the player to enlarge the plane by tapping on it, runs extremely slowly but it does eventually enlarge the plane, scene change from this is a little difficult but being worked on
+    //public GameObject greyOut;
     private bool clicked = false;
     private bool isEnlarged = false;
 
+    public GameObject ExploreUI;
 
     public CodexTezcatilpoca codexTezcatilpoca;
 
@@ -35,7 +37,7 @@ public class PlaneZoom : NetworkBehaviour
         //Enlarge plane
         if (clicked)
         {
-            //Debug.Log("1");
+            Debug.Log("1");
 
             /*if (!isEnlarged)
             {*/
@@ -45,25 +47,28 @@ public class PlaneZoom : NetworkBehaviour
             transform.rotation = Quaternion.Lerp(transform.rotation, planeTransform.rotation, Time.deltaTime * lerpSpeed);
             //Debug.Log(currentTransform.position);
             codexTezcatilpoca.pageTurner.SetActive(false);
+            ExploreUI.SetActive(true);
             //isEnlarged = true;
-                greyOut.gameObject.SetActive(true);
+            //greyOut.gameObject.SetActive(true);
             //}
         }
         //Minimize plane
-        /*else if (!clicked)
+        else if (!clicked)
         {
-            //Debug.Log("3");
+            Debug.Log("2");
 
-            *//*if (isEnlarged)
-            {*//*
-                //Debug.Log("4");
-                transform.position = Vector3.Lerp(transform.position, originalTransform.position, Time.deltaTime * lerpSpeed);
-                transform.rotation = Quaternion.Lerp(transform.rotation, originalTransform.rotation, Time.deltaTime * lerpSpeed);
-                //codexTezcatilpoca.pageTurner.SetActive(true);
-                //isEnlarged = false;
-                //greyOut.SetActive(false);
+            /*if (isEnlarged)
+            {*/
+            //Debug.Log("4");
+            transform.position = Vector3.Lerp(transform.position, originalTransform.position, Time.deltaTime * lerpSpeed);
+            transform.rotation = Quaternion.Lerp(transform.rotation, originalTransform.rotation, Time.deltaTime * lerpSpeed);
+            codexTezcatilpoca.pageTurner.SetActive(true);
+            ExploreUI.SetActive(false);
+
+            //isEnlarged = false;
+            //greyOut.SetActive(false);
             //}
-        }*/
+        }
 
     }
 

@@ -9,13 +9,14 @@ using UnityEngine.SceneManagement;
 
 public class PlayerScript : NetworkBehaviour
 {
+    //Finds empty game objects for cameras to be placed under
     private GameObject[] positions;
 
     private Camera _camera;
     private ScreenPixelCorrector pixelCorrector;
 
     private static int playerCount = 0;
-
+//unity netcode standard function
     public override void OnNetworkSpawn()
     {
         base.OnNetworkSpawn();
@@ -23,7 +24,7 @@ public class PlayerScript : NetworkBehaviour
         FindSpawnPos();
 
         SpawnPlayer();
-
+//double checks host camera when spawning multiple players and allows scene to begin
         if (!IsOwner) return;
         _camera.enabled = true;
         GetComponent<OVRScreenFade>().FadeIn();
@@ -52,7 +53,7 @@ public class PlayerScript : NetworkBehaviour
             Debug.Log("All spawn points taken up...");
         }
     }
-
+//increments through positions to spawn cameras in the correct places
     private void SpawnPlayer()
     {
         playerCount++;
