@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using Unity.Netcode;
+using Unity.Netcode.Components;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,7 +11,7 @@ public class PlaneZoom : NetworkBehaviour
     //this script allows the player to enlarge the plane by tapping on it, runs extremely slowly but it does eventually enlarge the plane, scene change from this is a little difficult but being worked on
     //public GameObject greyOut;
     private bool clicked = false;
-    private bool isEnlarged = false;
+    //private bool isEnlarged = false;
 
     public GameObject ExploreUI;
 
@@ -24,6 +25,7 @@ public class PlaneZoom : NetworkBehaviour
     public override void OnNetworkSpawn()
     {
         base.OnNetworkSpawn();
+        originalTransform = transform;
 
     }
 
@@ -34,57 +36,50 @@ public class PlaneZoom : NetworkBehaviour
 
     private void Update()
     {
-        //Enlarge plane
-        if (clicked)
+        if (!codexTezcatilpoca.isAnimating)
         {
-            Debug.Log("1");
+            //Enlarge plane
+            if (clicked)
+            {
+                
+                transform.position = Vector3.Lerp(transform.position, planeTransform.position, Time.deltaTime * lerpSpeed);
+                transform.rotation = Quaternion.Slerp(transform.rotation, planeTransform.rotation, Time.deltaTime * lerpSpeed);
 
-            /*if (!isEnlarged)
-            {*/
-            //Debug.Log("2");
+            }
+            //Minimize plane
+            else if (!clicked)
+            {
+                transform.position = Vector3.Lerp(transform.position, originalTransform.position, Time.deltaTime * lerpSpeed);
+                transform.rotation = Quaternion.Slerp(transform.rotation, originalTransform.rotation, Time.deltaTime * lerpSpeed);
 
-            transform.position = Vector3.Lerp(transform.position, planeTransform.position, Time.deltaTime * lerpSpeed);
-            transform.rotation = Quaternion.Lerp(transform.rotation, planeTransform.rotation, Time.deltaTime * lerpSpeed);
-            //Debug.Log(currentTransform.position);
-            codexTezcatilpoca.pageTurner.SetActive(false);
-            ExploreUI.SetActive(true);
-            //isEnlarged = true;
-            //greyOut.gameObject.SetActive(true);
-            //}
+            }
         }
-        //Minimize plane
-        else if (!clicked)
-        {
-            Debug.Log("2");
-
-            /*if (isEnlarged)
-            {*/
-            //Debug.Log("4");
-            transform.position = Vector3.Lerp(transform.position, originalTransform.position, Time.deltaTime * lerpSpeed);
-            transform.rotation = Quaternion.Lerp(transform.rotation, originalTransform.rotation, Time.deltaTime * lerpSpeed);
-            codexTezcatilpoca.pageTurner.SetActive(true);
-            ExploreUI.SetActive(false);
-
-            //isEnlarged = false;
-            //greyOut.SetActive(false);
-            //}
-        }
-
     }
 
     public void Clicked()
     {
         if (clicked)
         {
+            //Debug.Log("2");
+            codexTezcatilpoca.pageTurner.SetActive(true);
+            ExploreUI.SetActive(false);
+            GetComponent<NetworkTransform>().enabled = true;
+
             clicked = false;
         }
         else if (!clicked)
         {
-            originalTransform = transform;
+            //Debug.Log("1");
+            codexTezcatilpoca.pageTurner.SetActive(false);
+            ExploreUI.SetActive(true);
+            GetComponent<NetworkTransform>().enabled = false;
+
+            originalTransform.position = transform.position;
+            originalTransform.rotation = transform.rotation;
             //Debug.Log(originalTransform.position);
             clicked = true;
         }
-        Debug.Log("Panel is: " + clicked);
+        //Debug.Log("Panel is: " + clicked);
     }
 
 }

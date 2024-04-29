@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/FinalizedScenes/IntroEnvironment.unity
     guid: 4bba3e736eefc5b499c4919c24c19565
   - enabled: 1
+    path: Assets/Scenes/FinalizedScenes/ImmersiveScene.unity
+    guid: d1631cd69aac8a64f980357f96aa632e
+  - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 0
