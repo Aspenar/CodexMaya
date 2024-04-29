@@ -36,46 +36,46 @@ public class PlaneZoom : NetworkBehaviour
 
     private void Update()
     {
-        //Enlarge plane
-        if (clicked && !codexTezcatilpoca.isAnimating)
+        if (!codexTezcatilpoca.isAnimating)
         {
-            //Debug.Log("1");
-
-            transform.position = Vector3.Lerp(transform.position, planeTransform.position, Time.deltaTime * lerpSpeed);
-            transform.rotation = Quaternion.Lerp(transform.rotation, planeTransform.rotation, Time.deltaTime * lerpSpeed);
-            GetComponent<NetworkTransform>().enabled = false;
-/*            if (!codexTezcatilpoca.isAnimating)
+            //Enlarge plane
+            if (clicked)
             {
-*/                codexTezcatilpoca.pageTurner.SetActive(false);
-                ExploreUI.SetActive(true);
-            //}
-        }
-        //Minimize plane
-        else if (!clicked && !codexTezcatilpoca.isAnimating)
-        {
-            //Debug.Log("2");
+                
+                transform.position = Vector3.Lerp(transform.position, planeTransform.position, Time.deltaTime * lerpSpeed);
+                transform.rotation = Quaternion.Slerp(transform.rotation, planeTransform.rotation, Time.deltaTime * lerpSpeed);
 
-            transform.position = Vector3.Lerp(transform.position, originalTransform.position, Time.deltaTime * lerpSpeed);
-            transform.rotation = Quaternion.Lerp(transform.rotation, originalTransform.rotation, Time.deltaTime * lerpSpeed);
-            GetComponent<NetworkTransform>().enabled = true;
-            //if (!codexTezcatilpoca.isAnimating)
-            //{
-                codexTezcatilpoca.pageTurner.SetActive(true);
-                ExploreUI.SetActive(false);
-            //}
-        }
+            }
+            //Minimize plane
+            else if (!clicked)
+            {
+                transform.position = Vector3.Lerp(transform.position, originalTransform.position, Time.deltaTime * lerpSpeed);
+                transform.rotation = Quaternion.Slerp(transform.rotation, originalTransform.rotation, Time.deltaTime * lerpSpeed);
 
+            }
+        }
     }
 
     public void Clicked()
     {
         if (clicked)
         {
+            Debug.Log("2");
+            codexTezcatilpoca.pageTurner.SetActive(true);
+            ExploreUI.SetActive(false);
+            GetComponent<NetworkTransform>().enabled = true;
+
             clicked = false;
         }
         else if (!clicked)
         {
+            Debug.Log("1");
+            codexTezcatilpoca.pageTurner.SetActive(false);
+            ExploreUI.SetActive(true);
+            GetComponent<NetworkTransform>().enabled = false;
+
             originalTransform.position = transform.position;
+            originalTransform.rotation = transform.rotation;
             //Debug.Log(originalTransform.position);
             clicked = true;
         }

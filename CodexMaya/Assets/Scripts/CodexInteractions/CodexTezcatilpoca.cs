@@ -20,12 +20,14 @@ public class CodexTezcatilpoca : NetworkBehaviour
     public float rotationIncrement = 5.0f;
     private Quaternion targetRotation;
     private float currentRotation = 90f;
+    private bool isRotating;
+    public float thresholdAngle;
 
     public Animator anim;
-    public bool isAnimating;
-    private bool isRotating;
+    public bool isAnimating = true;
 
-    public float thresholdAngle;
+    private bool isPageTurnerActive = false;
+
 
     [Header("UI")]
     public GameObject pageTurner;
@@ -54,10 +56,19 @@ public class CodexTezcatilpoca : NetworkBehaviour
 
     private void Update()
     {
+        if(pageTurner.activeInHierarchy == true)
+        {
+            isPageTurnerActive = true;
+        }
+        else
+        {
+            isPageTurnerActive = false;
+        }
+        Debug.Log(isPageTurnerActive);
         if (!isAnimating && isRotating)
         {
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
-            
+
             if (Quaternion.Angle(transform.rotation, targetRotation) < thresholdAngle)
             {
                 isRotating = false;
