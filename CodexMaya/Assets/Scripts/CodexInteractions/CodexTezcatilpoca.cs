@@ -22,7 +22,10 @@ public class CodexTezcatilpoca : NetworkBehaviour
     private float currentRotation = 90f;
 
     public Animator anim;
-    private bool isAnimating;
+    public bool isAnimating;
+    private bool isRotating;
+
+    public float thresholdAngle;
 
     [Header("UI")]
     public GameObject pageTurner;
@@ -32,6 +35,7 @@ public class CodexTezcatilpoca : NetworkBehaviour
         base.OnNetworkSpawn();
         anim = GetComponent<Animator>();
         Debug.Log("Codex loading...");
+        pageTurner.SetActive(false);
         m_IsAnimationPlaying.OnValueChanged += OnAnimationStateChanged;
     }
 
@@ -50,9 +54,14 @@ public class CodexTezcatilpoca : NetworkBehaviour
 
     private void Update()
     {
-        if (!isAnimating)
+        if (!isAnimating && isRotating)
         {
-            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
+            
+            if (Quaternion.Angle(transform.rotation, targetRotation) < thresholdAngle)
+            {
+                isRotating = false;
+            }
         }
     }
 
@@ -87,7 +96,7 @@ public class CodexTezcatilpoca : NetworkBehaviour
     public void RotateLeftServerRpc()
     {
         currentRotation -= rotationIncrement;
-
+        isRotating = true;
         targetRotation = Quaternion.Euler(0, currentRotation, 0);
         Debug.Log("Right");
     }
@@ -96,7 +105,7 @@ public class CodexTezcatilpoca : NetworkBehaviour
     public void RotateRightServerRpc()
     {
         currentRotation += rotationIncrement;
-
+        isRotating = true;
         targetRotation = Quaternion.Euler(0, currentRotation, 0);
         Debug.Log("Left");
     }

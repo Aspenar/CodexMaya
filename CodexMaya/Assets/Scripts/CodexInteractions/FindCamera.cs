@@ -15,7 +15,7 @@ public class FindCamera : NetworkBehaviour
         base.OnNetworkSpawn();
         canvas = GetComponent<Canvas>();
         canvas.worldCamera = GameObject.Find(camera).GetComponent<Camera>();
-        canvas.planeDistance = 2;
+        canvas.planeDistance = 1f;
         Debug.Log("Finding Camera2...");
     }
 
