@@ -26,7 +26,6 @@ public class CodexTezcatilpoca : NetworkBehaviour
     public Animator anim;
     public bool isAnimating = true;
 
-    private bool isPageTurnerActive = false;
 
 
     [Header("UI")]
@@ -36,7 +35,7 @@ public class CodexTezcatilpoca : NetworkBehaviour
     {
         base.OnNetworkSpawn();
         anim = GetComponent<Animator>();
-        Debug.Log("Codex loading...");
+        //Debug.Log("Codex loading...");
         pageTurner.SetActive(false);
         m_IsAnimationPlaying.OnValueChanged += OnAnimationStateChanged;
     }
@@ -56,15 +55,6 @@ public class CodexTezcatilpoca : NetworkBehaviour
 
     private void Update()
     {
-        if(pageTurner.activeInHierarchy == true)
-        {
-            isPageTurnerActive = true;
-        }
-        else
-        {
-            isPageTurnerActive = false;
-        }
-        Debug.Log(isPageTurnerActive);
         if (!isAnimating && isRotating)
         {
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
@@ -78,10 +68,10 @@ public class CodexTezcatilpoca : NetworkBehaviour
 
     public void OpenBook()
     {
-        Debug.Log("Book Opening...");
+        //Debug.Log("Book Opening...");
         if (IsOwnedByServer)
         {
-            Debug.Log("Sending OpenBookServerRpc...");
+            //Debug.Log("Sending OpenBookServerRpc...");
             OpenBookServerRpc();
         }
         else
@@ -98,9 +88,9 @@ public class CodexTezcatilpoca : NetworkBehaviour
     [ServerRpc(RequireOwnership = false)]
     private void OpenBookServerRpc()
     {
-        Debug.Log("Received OpenBookServerRpc on the server.");
+        //Debug.Log("Received OpenBookServerRpc on the server.");
         m_IsAnimationPlaying.Value = true;
-        Debug.Log("Network Value changed: " + m_IsAnimationPlaying.Value);
+        //Debug.Log("Network Value changed: " + m_IsAnimationPlaying.Value);
     }
 
     [ServerRpc(RequireOwnership = false)]
@@ -109,7 +99,7 @@ public class CodexTezcatilpoca : NetworkBehaviour
         currentRotation -= rotationIncrement;
         isRotating = true;
         targetRotation = Quaternion.Euler(0, currentRotation, 0);
-        Debug.Log("Right");
+        //Debug.Log("Right");
     }
 
     [ServerRpc(RequireOwnership = false)]
@@ -118,7 +108,7 @@ public class CodexTezcatilpoca : NetworkBehaviour
         currentRotation += rotationIncrement;
         isRotating = true;
         targetRotation = Quaternion.Euler(0, currentRotation, 0);
-        Debug.Log("Left");
+        //Debug.Log("Left");
     }
 
     private void OnAnimationStateChanged(bool previousValue, bool newValue)
@@ -132,7 +122,7 @@ public class CodexTezcatilpoca : NetworkBehaviour
 
     public IEnumerator PlayAnimation()
     {
-        Debug.Log("Playing anim...");
+        //Debug.Log("Playing anim...");
         anim.Play(enlargeAnim);
         isAnimating = true;
 

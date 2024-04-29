@@ -60,7 +60,7 @@ public class PlaneZoom : NetworkBehaviour
     {
         if (clicked)
         {
-            Debug.Log("2");
+            //Debug.Log("2");
             codexTezcatilpoca.pageTurner.SetActive(true);
             ExploreUI.SetActive(false);
             GetComponent<NetworkTransform>().enabled = true;
@@ -69,7 +69,7 @@ public class PlaneZoom : NetworkBehaviour
         }
         else if (!clicked)
         {
-            Debug.Log("1");
+            //Debug.Log("1");
             codexTezcatilpoca.pageTurner.SetActive(false);
             ExploreUI.SetActive(true);
             GetComponent<NetworkTransform>().enabled = false;
@@ -79,7 +79,7 @@ public class PlaneZoom : NetworkBehaviour
             //Debug.Log(originalTransform.position);
             clicked = true;
         }
-        Debug.Log("Panel is: " + clicked);
+        //Debug.Log("Panel is: " + clicked);
     }
 
 }

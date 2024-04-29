@@ -31,7 +31,7 @@ public class SceneChanger : NetworkBehaviour
             m_NetworkSceneManager.OnSceneEvent += SceneManager_OnSceneEvent;
         }
     }*/
-//used to grab scene manager for all players
+    //used to grab scene manager for all players
     public override void OnNetworkSpawn()
     {
         base.OnNetworkSpawn();
@@ -58,6 +58,8 @@ public class SceneChanger : NetworkBehaviour
 //override for scene changes
     public override void OnNetworkDespawn()
     {
+        m_NextScene.Value = false;
+
         if (m_NetworkSceneManager != null)
         {
             m_NetworkSceneManager.OnSceneEvent -= SceneManager_OnSceneEvent;
@@ -83,7 +85,7 @@ public class SceneChanger : NetworkBehaviour
     public void InitiateSceneTransitionServerRpc()
     {
         m_NextScene.Value = true;
-        Debug.Log(m_NextScene.Value);
+        Debug.Log("Initiating Scene Trasistion...");
     }
 
     private void OnSceneStateChanged(bool previousValue, bool newValue)
@@ -91,17 +93,19 @@ public class SceneChanger : NetworkBehaviour
         // Update the animation state based on the networked variable
         if (newValue)
         {
+            Debug.Log("New value recieved...");
+
             //StartCoroutine(PlayAnimation()); 
             NextSceneServerRpc();
 
-            if (IsServer && !string.IsNullOrEmpty(m_SceneName))
+            /*if (IsServer && !string.IsNullOrEmpty(m_SceneName))
             {
                 UnloadScene();
-            }
+            }*/
         }
     }
 
-    IEnumerator StartTransition()
+   /* IEnumerator StartTransition()
     {
         foreach (GameObject player in players) 
         {
@@ -116,7 +120,7 @@ public class SceneChanger : NetworkBehaviour
         {
             player.GetComponent<OVRScreenFade>().FadeIn();
         }
-    }
+    }*/
 
     public bool SceneIsLoaded
     {
@@ -153,6 +157,7 @@ public class SceneChanger : NetworkBehaviour
                         // *** IMPORTANT ***
                         // Keep track of the loaded scene, you need this to unload it
                         m_LoadedScene = sceneEvent.Scene;
+                        //Debug.Log(m_LoadedScene.name);
                     }
                     Debug.Log($"Loaded the {sceneEvent.SceneName} scene on " +
                         $"{clientOrServer}-({sceneEvent.ClientId}).");
@@ -183,6 +188,8 @@ public class SceneChanger : NetworkBehaviour
     [ServerRpc(RequireOwnership = false)]
     private void NextSceneServerRpc()
     {
+        Debug.Log("Sending Next Scene...");
+
         LoadNextScene();
 
         //NextSceneClientRpc();
@@ -204,9 +211,11 @@ public class SceneChanger : NetworkBehaviour
                   $"with a {nameof(SceneEventProgressStatus)}: {status}");
         }
     }
-//checks if new scene is loaded then unloads old scene for performance
+    //checks if new scene is loaded then unloads old scene for performance
     public void UnloadScene()
     {
+        Debug.Log("Unloading Scene...");
+
         //GameObject.Find("Player 1").GetComponent<Camera>().enabled = true;
         // Assure only the server calls this when the NetworkObject is
         // spawned and the scene is loaded.
@@ -221,5 +230,4 @@ public class SceneChanger : NetworkBehaviour
         GameObject.Find("Player 1").GetComponent<Camera>().enabled = true;
 
     }
-
 }
